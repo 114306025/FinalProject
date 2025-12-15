@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SilverCare - 您的台語語音AI伴侶</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* 綠色系調色盤 - 依照截圖風格調整 */
-            --primary-color: #4CAF50;       /* 標準綠 */
-            --primary-dark: #2E7D32;        /* 深綠 */
-            --primary-light: #E8F5E9;       /* 極淺綠背景 */
-            --accent-red: #e53935;          /* 警示紅 */
-            --bg-color: #F1F8E9;            /* 整體背景色 */
+            /* 綠色系調色盤 */
+            --primary-color: #4CAF50;
+            --primary-dark: #2E7D32;
+            --primary-light: #E8F5E9;
+            --accent-red: #e53935;
+            --bg-color: #F1F8E9;
             --white: #FFFFFF;
-            --text-dark: #37474F;           /* 深灰文字 */
-            --text-gray: #757575;           /* 淺灰說明文字 */
+            --text-dark: #37474F;
+            --text-gray: #757575;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             --radius-card: 16px;
             --radius-btn: 50px;
             --input-bg: #FFFFFF;
             --input-border: #E0E0E0;
+            
+            /* 社群顏色 */
+            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --fb-blue: #1877F2;
+            --threads-black: #000000;
         }
 
         * {
@@ -34,13 +39,12 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #e0e0e0; /* 電腦版背景 */
+            background-color: #e0e0e0;
             display: flex;
             justify-content: center;
             min-height: 100vh;
         }
 
-        /* 模擬手機 App 容器 */
         .app-container {
             width: 100%;
             max-width: 480px;
@@ -49,10 +53,10 @@
             position: relative;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
             overflow-x: hidden;
-            padding-bottom: 80px; /* 留給底部導航欄的空間 */
+            padding-bottom: 80px;
         }
 
-        /* --- 頂部導航欄 (保持原樣) --- */
+        /* --- 頂部導航欄 --- */
         .header {
             background: rgba(255, 255, 255, 0.98);
             padding: 15px 20px;
@@ -106,7 +110,7 @@
             color: var(--text-dark);
         }
 
-        /* --- 首頁 Hero 區域 (照片二) --- */
+        /* --- 首頁 Hero 區域 --- */
         .home-hero {
             text-align: center;
             padding: 40px 20px 30px;
@@ -147,7 +151,7 @@
             margin-bottom: 30px;
         }
 
-        /* 麥克風按鈕 (照片二樣式) */
+        /* 麥克風按鈕 */
         .mic-container {
             display: flex;
             flex-direction: column;
@@ -175,7 +179,6 @@
             transform: scale(0.95);
         }
 
-        /* 呼吸燈效果 */
         .mic-btn-large::after {
             content: '';
             position: absolute;
@@ -201,7 +204,7 @@
             font-weight: 500;
         }
 
-        /* --- 話題卡片網格 (照片三) --- */
+        /* --- 話題卡片網格 --- */
         .topic-grid {
             padding: 0 20px 20px;
             display: grid;
@@ -245,7 +248,6 @@
             font-weight: 500;
         }
 
-        /* 個別卡片配色 */
         .t-weather .topic-icon { background: #FFF3E0; color: #FF9800; }
         .t-mood .topic-icon    { background: #FFEBEE; color: #F44336; }
         .t-news .topic-icon    { background: #E3F2FD; color: #2196F3; }
@@ -253,14 +255,90 @@
         .t-travel .topic-icon  { background: #F3E5F5; color: #9C27B0; }
         .t-chat .topic-icon    { background: #E0F2F1; color: #009688; }
 
-        /* --- 聊天紀錄頁面 (照片五) --- */
+        .home-history-btn {
+            margin: 0 20px 20px;
+            background: var(--white);
+            padding: 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .home-history-btn i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* --- 家人頁面 --- */
+        .social-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 0 20px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .social-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .icon-ig { background: var(--ig-gradient); }
+        .icon-fb { background: var(--fb-blue); }
+        .icon-threads { background: var(--threads-black); }
+
+        .social-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .status-new {
+            background: #FFEBEE;
+            color: #D32F2F;
+        }
+
+        .status-none {
+            background: #F5F5F5;
+            color: #9E9E9E;
+        }
+
+        /* --- 聊天紀錄頁面 (獨立新頁面) --- */
         .chat-history-container {
             padding: 20px;
         }
-
+        
         .history-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .chat-record-card {
@@ -273,7 +351,6 @@
             overflow: hidden;
         }
 
-        /* 左側顏色條 */
         .chat-record-card::before {
             content: '';
             position: absolute;
@@ -283,9 +360,7 @@
             width: 5px;
         }
         
-        /* 綠色條 (AI回應為主) */
         .record-green::before { background-color: var(--primary-color); }
-        /* 紅色條 (強調或心情) */
         .record-red::before { background-color: #EF5350; }
 
         .record-time {
@@ -312,8 +387,7 @@
             line-height: 1.4;
         }
 
-
-        /* --- 個人設定頁面 (照片四) --- */
+        /* --- 個人設定頁面 --- */
         .profile-container {
             padding: 20px;
         }
@@ -390,7 +464,7 @@
             background: #2E7D32;
         }
 
-        /* --- 健康報表區域 (維持原樣) --- */
+        /* --- 健康報表區域 --- */
         .health-report-card {
             margin: 20px;
             background: white;
@@ -444,7 +518,7 @@
             color: var(--primary-dark);
         }
 
-        /* --- 底部導航欄 (保持原樣) --- */
+        /* --- 底部導航欄 --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -556,18 +630,63 @@
                     <div class="topic-icon"><i class="fa-solid fa-heart-pulse"></i></div>
                     <span class="topic-text">健康</span>
                 </div>
-                <div class="topic-card t-travel" onclick="alert('開啟旅行話題功能...')">
+                <div class="topic-card t-travel" onclick="handleTravel()">
                     <div class="topic-icon"><i class="fa-solid fa-plane"></i></div>
                     <span class="topic-text">旅行</span>
                 </div>
-                <div class="topic-card t-chat" onclick="alert('開啟自由聊天模式...')">
+                <div class="topic-card t-chat" onclick="handleChatMode()">
                     <div class="topic-icon"><i class="fa-solid fa-comments"></i></div>
                     <span class="topic-text">自由聊天</span>
                 </div>
             </div>
+
+            <div class="home-history-btn" onclick="switchPage('history', null)">
+                <div>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>查看聊天紀錄</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: #ccc; font-size: 1rem;"></i>
+            </div>
         </div>
 
-        <div id="page-chat" class="page">
+        <div id="page-family" class="page">
+            <div class="home-hero" style="padding-bottom: 20px;">
+                <h1 class="hero-title">家人動態</h1>
+                <p class="hero-subtitle">看看孫子、孫女最近在做什麼</p>
+            </div>
+
+            <div class="social-card" onclick="openLink('instagram')">
+                <div class="social-info">
+                    <div class="social-icon icon-ig">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <span class="social-name">Instagram</span>
+                </div>
+                <div class="status-badge" id="status-ig">檢查中...</div>
+            </div>
+
+            <div class="social-card" onclick="openLink('facebook')">
+                <div class="social-info">
+                    <div class="social-icon icon-fb">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                    <span class="social-name">Facebook</span>
+                </div>
+                <div class="status-badge" id="status-fb">檢查中...</div>
+            </div>
+
+            <div class="social-card" onclick="openLink('threads')">
+                <div class="social-info">
+                    <div class="social-icon icon-threads">
+                        <i class="fa-brands fa-threads"></i>
+                    </div>
+                    <span class="social-name">Threads</span>
+                </div>
+                <div class="status-badge" id="status-threads">檢查中...</div>
+            </div>
+        </div>
+
+        <div id="page-history" class="page">
             <div class="chat-history-container">
                 <div class="history-header">
                     <h2 class="hero-title">聊天紀錄</h2>
@@ -691,9 +810,9 @@
                 <i class="fa-solid fa-house"></i>
                 <span>首頁</span>
             </div>
-            <div class="nav-item" onclick="switchPage('chat', this)">
-                <i class="fa-solid fa-comment-dots"></i>
-                <span>聊天</span>
+            <div class="nav-item" onclick="switchPage('family', this)">
+                <i class="fa-solid fa-users"></i>
+                <span>家人</span>
             </div>
             <div class="nav-item" onclick="switchPage('report', this)">
                 <i class="fa-solid fa-chart-pie"></i>
@@ -709,32 +828,32 @@
     <script>
         // 頁面切換邏輯
         function switchPage(pageId, element) {
-            // 隱藏所有頁面
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            // 顯示目標頁面
             document.getElementById('page-' + pageId).classList.add('active');
             
-            // 更新底部導航狀態
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if(element) {
                 element.classList.add('active');
             } else {
-                // 如果是從內部按鈕跳轉，手動點亮對應的 nav item
                 const navIndex = {
                     'home': 0,
-                    'chat': 1,
+                    'family': 1,
                     'report': 2,
                     'profile': 3
                 };
-                const items = document.querySelectorAll('.nav-item');
-                if(items[navIndex[pageId]]) items[navIndex[pageId]].classList.add('active');
+                if (navIndex[pageId] !== undefined) {
+                    const items = document.querySelectorAll('.nav-item');
+                    if(items[navIndex[pageId]]) items[navIndex[pageId]].classList.add('active');
+                }
             }
             
-            // 滾動到頂部
+            if(pageId === 'family') {
+                checkFamilyStatus();
+            }
+
             window.scrollTo(0,0);
         }
 
-        // 語音互動模擬
         function activateVoice() {
             const statusText = document.getElementById('voice-status');
             statusText.innerText = "正在聆聽...";
@@ -755,23 +874,87 @@
             }, 2000);
         }
 
-        // 天氣功能
+        function handleChatMode() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         function handleWeather() {
-            alert("(播放台語語音) \nSilverCare：\n「台北今仔日溫度 24 度，有淡薄仔雨，出門愛記得帶雨傘喔！」");
+            const location = prompt("SilverCare：\n「阿公，請問你現在在哪個縣市？」", "台北");
+            if (location) {
+                alert(`(播放台語語音) \nSilverCare：\n「${location} 今仔日溫度 24 度，有淡薄仔雨，出門愛記得穿外套喔！」`);
+            }
         }
 
-        // 心情功能
+        // 【修改處】
+        // 使用 prompt 模擬語音輸入，並根據文字內容判斷心情
         function handleMood() {
-            const mood = prompt("SilverCare：\n「阿公，你今仔日心情好無？」", "好");
-            if(mood) alert("SilverCare：\n「按呢真好，保持快樂的心情身體才會勇健喔！」");
-        }
+            // 模擬 SilverCare 提問 (台語語音)
+            const moodResponse = prompt(
+                "SilverCare：\n「阿公，你今仔日心情好無？跟我講一下你現在的心情。」\n\n(請輸入你的回答，例如：好、歹、普通、足歡喜...)"
+            );
 
-        // 新聞功能
+            // 檢查使用者是否輸入內容
+            if (moodResponse === null || moodResponse.trim() === "") {
+                alert("SilverCare：\n「無要緊，若是有需要，隨時可以來找我聊聊。」");
+                return;
+            }
+
+            // 將輸入轉為小寫並去除空白，方便判斷
+            const normalizedResponse = moodResponse.toLowerCase().trim();
+
+            // 判斷是否為正向心情的關鍵字
+            const goodKeywords = ["好", "歡喜", "快樂", "不錯", "開心", "讚", "ok"];
+            
+            let isGoodMood = false;
+            for (const keyword of goodKeywords) {
+                if (normalizedResponse.includes(keyword)) {
+                    isGoodMood = true;
+                    break;
+                }
+            }
+
+            // 模擬 SilverCare 回覆 (台語語音)
+            if (isGoodMood) {
+                alert("SilverCare：\n「按呢真好！保持快樂的心情身體才會勇健喔！」");
+            } else {
+                // 如果沒有正面關鍵字，則視為心情一般或不好
+                alert("SilverCare：\n「無要緊，若是有什麼煩惱，可以跟我講，我會陪你。記得保持輕鬆，不要想太多。」");
+            }
+        }
+        
         function handleNews() {
             alert("(播放台語新聞) \nSilverCare：\n「氣象署表示，下禮拜寒流會來，請大家注意保暖...」");
         }
+        
+        function handleTravel() {
+            const city = prompt("SilverCare：\n「阿公，你想去哪個城市𨑨迌（玩）？」");
+            if(city) {
+                alert(`SilverCare：\n「${city} 是一個好所在！我們可以來規劃一下去 ${city} 的行程，看要吃什麼好料的。」`);
+            }
+        }
 
-        // 儲存個人資料
+        function checkFamilyStatus() {
+            const platforms = ['ig', 'fb', 'threads'];
+            platforms.forEach(p => {
+                const badge = document.getElementById(`status-${p}`);
+                const hasNew = Math.random() > 0.5;
+                if (hasNew) {
+                    badge.innerText = "有新動態";
+                    badge.className = "status-badge status-new";
+                } else {
+                    badge.innerText = "沒有";
+                    badge.className = "status-badge status-none";
+                }
+            });
+        }
+
+        function openLink(platform) {
+            alert(`正在開啟家人的 ${platform} ...`);
+        }
+
         function saveProfile() {
             alert("資料已儲存！\n\nSilverCare 將根據您的設定提供更個人化的服務。");
         }
