@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SilverCare - 您的台語語音AI伴侶</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -275,24 +275,6 @@
         }
 
         /* --- 家人頁面 --- */
-        .social-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 0 20px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            cursor: pointer;
-        }
-
-        .social-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .social-icon {
             width: 50px;
             height: 50px;
@@ -308,30 +290,7 @@
         .icon-fb { background: var(--fb-blue); }
         .icon-threads { background: var(--threads-black); }
 
-        .social-name {
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 1.1rem;
-        }
-
-        .status-badge {
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .status-new {
-            background: #FFEBEE;
-            color: #D32F2F;
-        }
-
-        .status-none {
-            background: #F5F5F5;
-            color: #9E9E9E;
-        }
-
-        /* --- 聊天紀錄頁面 (獨立新頁面) --- */
+        /* --- 聊天紀錄頁面 --- */
         .chat-history-container {
             padding: 20px;
         }
@@ -650,39 +609,58 @@
         </div>
 
         <div id="page-family" class="page">
-            <div class="home-hero" style="padding-bottom: 20px;">
-                <h1 class="hero-title">家人動態</h1>
-                <p class="hero-subtitle">看看孫子、孫女最近在做什麼</p>
+
+            <div class="section-header">
+                <div class="section-title-border"></div>
+                <span class="section-title">新動態</span>
             </div>
 
-            <div class="social-card" onclick="openLink('instagram')">
-                <div class="social-info">
-                    <div class="social-icon icon-ig">
+            <div class="form-card" style="margin: 0 20px;">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop" alt="孫子旅遊照" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <div class="social-icon icon-ig" style="width: 30px; height: 30px; font-size: 1.2rem; margin-right: 10px; border-radius: 8px;">
                         <i class="fa-brands fa-instagram"></i>
                     </div>
-                    <span class="social-name">Instagram</span>
+                    <span style="font-weight: bold; color: #333;">乖孫女 小美</span>
                 </div>
-                <div class="status-badge" id="status-ig">檢查中...</div>
+                
+                <p id="post-content-text" style="color: var(--text-dark); font-size: 1rem; line-height: 1.6; margin-bottom: 20px;">
+                    阿公！這是我們昨天去陽明山看花的照片，那邊的花開得很漂亮，空氣也很好。下次等你腳比較舒服的時候，我們全家再開車帶你去走走喔！愛你 ❤️
+                </p>
+
+                <button class="save-btn" onclick="readPost()" style="background-color: #2196F3; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fa-solid fa-volume-high"></i>
+                    朗讀這篇貼文
+                </button>
             </div>
 
-            <div class="social-card" onclick="openLink('facebook')">
-                <div class="social-info">
-                    <div class="social-icon icon-fb">
+            <div class="section-header" style="margin-top: 25px;">
+                <div class="section-title-border" style="background-color: #757575;"></div>
+                <span class="section-title">舊動態</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; padding: 10px 30px 30px;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;" onclick="openLink('instagram')">
+                    <div class="social-icon icon-ig" style="width: 60px; height: 60px; border-radius: 50%; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #666;">Instagram</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;" onclick="openLink('facebook')">
+                    <div class="social-icon icon-fb" style="width: 60px; height: 60px; border-radius: 50%; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                         <i class="fa-brands fa-facebook-f"></i>
                     </div>
-                    <span class="social-name">Facebook</span>
+                    <span style="font-size: 0.8rem; color: #666;">Facebook</span>
                 </div>
-                <div class="status-badge" id="status-fb">檢查中...</div>
-            </div>
 
-            <div class="social-card" onclick="openLink('threads')">
-                <div class="social-info">
-                    <div class="social-icon icon-threads">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;" onclick="openLink('threads')">
+                    <div class="social-icon icon-threads" style="width: 60px; height: 60px; border-radius: 50%; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                         <i class="fa-brands fa-threads"></i>
                     </div>
-                    <span class="social-name">Threads</span>
+                    <span style="font-size: 0.8rem; color: #666;">Threads</span>
                 </div>
-                <div class="status-badge" id="status-threads">檢查中...</div>
             </div>
         </div>
 
@@ -801,6 +779,23 @@
                     <textarea class="form-input" placeholder="請輸入您的興趣（例如：看布袋戲、種花）"></textarea>
                 </div>
 
+                <div class="form-card">
+                    <label class="form-label" style="border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+                        家人社群帳號
+                    </label>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <input type="text" id="family-account-input" class="form-input" placeholder="輸入家人帳號名稱或連結...">
+                        <button onclick="addFamilyAccount()" style="background: var(--primary-color); color: white; border: none; border-radius: 10px; padding: 0 15px; font-weight: bold; cursor: pointer;">新增</button>
+                    </div>
+
+                    <div id="saved-accounts-list" style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="text-align: center; color: #999; font-size: 0.9rem; padding: 10px;" id="no-account-msg">
+                            目前尚未儲存任何帳號
+                        </div>
+                    </div>
+                </div>
+
                 <button class="save-btn" onclick="saveProfile()">儲存個人資料</button>
             </div>
         </div>
@@ -847,10 +842,6 @@
                 }
             }
             
-            if(pageId === 'family') {
-                checkFamilyStatus();
-            }
-
             window.scrollTo(0,0);
         }
 
@@ -888,24 +879,17 @@
             }
         }
 
-        // 【修改處】
-        // 使用 prompt 模擬語音輸入，並根據文字內容判斷心情
         function handleMood() {
-            // 模擬 SilverCare 提問 (台語語音)
             const moodResponse = prompt(
                 "SilverCare：\n「阿公，你今仔日心情好無？跟我講一下你現在的心情。」\n\n(請輸入你的回答，例如：好、歹、普通、足歡喜...)"
             );
 
-            // 檢查使用者是否輸入內容
             if (moodResponse === null || moodResponse.trim() === "") {
                 alert("SilverCare：\n「無要緊，若是有需要，隨時可以來找我聊聊。」");
                 return;
             }
 
-            // 將輸入轉為小寫並去除空白，方便判斷
             const normalizedResponse = moodResponse.toLowerCase().trim();
-
-            // 判斷是否為正向心情的關鍵字
             const goodKeywords = ["好", "歡喜", "快樂", "不錯", "開心", "讚", "ok"];
             
             let isGoodMood = false;
@@ -916,11 +900,9 @@
                 }
             }
 
-            // 模擬 SilverCare 回覆 (台語語音)
             if (isGoodMood) {
                 alert("SilverCare：\n「按呢真好！保持快樂的心情身體才會勇健喔！」");
             } else {
-                // 如果沒有正面關鍵字，則視為心情一般或不好
                 alert("SilverCare：\n「無要緊，若是有什麼煩惱，可以跟我講，我會陪你。記得保持輕鬆，不要想太多。」");
             }
         }
@@ -936,27 +918,58 @@
             }
         }
 
-        function checkFamilyStatus() {
-            const platforms = ['ig', 'fb', 'threads'];
-            platforms.forEach(p => {
-                const badge = document.getElementById(`status-${p}`);
-                const hasNew = Math.random() > 0.5;
-                if (hasNew) {
-                    badge.innerText = "有新動態";
-                    badge.className = "status-badge status-new";
-                } else {
-                    badge.innerText = "沒有";
-                    badge.className = "status-badge status-none";
-                }
-            });
-        }
-
         function openLink(platform) {
-            alert(`正在開啟家人的 ${platform} ...`);
+            alert(`正在開啟家人的 ${platform} 頁面...`);
         }
 
         function saveProfile() {
             alert("資料已儲存！\n\nSilverCare 將根據您的設定提供更個人化的服務。");
+        }
+
+        // --- 功能函數 ---
+
+        // 朗讀貼文
+        function readPost() {
+            const text = document.getElementById('post-content-text').innerText;
+            // 使用瀏覽器語音合成 API 朗讀 (如果支援)
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW'; // 設定語言為繁體中文
+                utterance.rate = 0.9; // 稍微放慢語速適合長輩
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("（模擬語音朗讀）：" + text);
+            }
+        }
+
+        // 新增家人帳號到列表
+        function addFamilyAccount() {
+            const input = document.getElementById('family-account-input');
+            const list = document.getElementById('saved-accounts-list');
+            const noAccountMsg = document.getElementById('no-account-msg');
+            const value = input.value.trim();
+
+            if (value) {
+                // 隱藏「無儲存帳號」的提示
+                if(noAccountMsg) noAccountMsg.style.display = 'none';
+
+                // 建立新的帳號項目元素
+                const newItem = document.createElement('div');
+                newItem.style.cssText = "background: #F1F8E9; padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #C8E6C9;";
+                
+                // 內容 HTML
+                newItem.innerHTML = `
+                    <span style="color: #2E7D32; font-weight: 500;">
+                        <i class="fa-solid fa-user-tag" style="margin-right: 5px;"></i> ${value}
+                    </span>
+                    <i class="fa-solid fa-trash" onclick="this.parentElement.remove()" style="color: #ef5350; cursor: pointer; padding: 5px;"></i>
+                `;
+
+                list.appendChild(newItem);
+                input.value = ""; // 清空輸入欄
+            } else {
+                alert("請輸入帳號喔！");
+            }
         }
     </script>
 </body>
