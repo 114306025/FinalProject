@@ -9,7 +9,6 @@
     
     <style>
         :root {
-            /* 綠色系調色盤 */
             --primary-color: #4CAF50;
             --primary-dark: #2E7D32;
             --primary-light: #E8F5E9;
@@ -24,7 +23,6 @@
             --input-bg: #FFFFFF;
             --input-border: #E0E0E0;
             
-            /* 社群顏色 */
             --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --fb-blue: #1877F2;
             --threads-black: #000000;
@@ -56,7 +54,6 @@
             padding-bottom: 80px;
         }
 
-        /* --- 頂部導航欄 --- */
         .header {
             background: rgba(255, 255, 255, 0.98);
             padding: 15px 20px;
@@ -89,7 +86,6 @@
             cursor: pointer;
         }
 
-        /* --- 通用標題樣式 --- */
         .section-header {
             padding: 15px 20px 5px;
             display: flex;
@@ -110,7 +106,6 @@
             color: var(--text-dark);
         }
 
-        /* --- 首頁 Hero 區域 --- */
         .home-hero {
             text-align: center;
             padding: 40px 20px 30px;
@@ -151,7 +146,6 @@
             margin-bottom: 30px;
         }
 
-        /* 麥克風按鈕 */
         .mic-container {
             display: flex;
             flex-direction: column;
@@ -204,7 +198,6 @@
             font-weight: 500;
         }
 
-        /* --- 話題卡片網格 --- */
         .topic-grid {
             padding: 0 20px 20px;
             display: grid;
@@ -274,7 +267,6 @@
             font-size: 1.2rem;
         }
 
-        /* --- 家人頁面 --- */
         .social-icon {
             width: 50px;
             height: 50px;
@@ -290,7 +282,6 @@
         .icon-fb { background: var(--fb-blue); }
         .icon-threads { background: var(--threads-black); }
 
-        /* --- 聊天紀錄頁面 --- */
         .chat-history-container {
             padding: 20px;
         }
@@ -346,7 +337,6 @@
             line-height: 1.4;
         }
 
-        /* --- 個人設定頁面 --- */
         .profile-container {
             padding: 20px;
         }
@@ -423,7 +413,6 @@
             background: #2E7D32;
         }
 
-        /* --- 健康報表區域 --- */
         .health-report-card {
             margin: 20px;
             background: white;
@@ -434,9 +423,9 @@
 
         .chart-container {
             display: flex;
-            align-items: flex-end;
             justify-content: space-between;
-            height: 120px;
+            align-items: flex-end;
+            height: 200px;
             margin-top: 20px;
             padding-bottom: 5px;
             border-bottom: 1px solid #eee;
@@ -445,17 +434,19 @@
         .bar-group {
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
             align-items: center;
-            gap: 5px;
-            width: 12%;
+            width: 14%;
+            height: 100%;
         }
 
         .bar {
             width: 100%;
             background: var(--primary-light);
             border-radius: 4px 4px 0 0;
-            transition: height 1s ease;
-            position: relative;
+            transition: height 1s ease-out;
+            height: 0%;
+            min-height: 2px;
         }
 
         .bar.active {
@@ -463,8 +454,10 @@
         }
 
         .bar-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-gray);
+            margin-top: 8px;
+            text-align: center;
         }
 
         .health-score {
@@ -477,7 +470,6 @@
             color: var(--primary-dark);
         }
 
-        /* --- 底部導航欄 --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -521,7 +513,6 @@
             color: var(--primary-color);
         }
 
-        /* --- 頁面切換控制 --- */
         .page {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -699,7 +690,7 @@
 
         <div id="page-report" class="page">
             <div class="home-hero" style="padding-bottom: 20px;">
-                <h1 class="hero-title">本週心理健康報告</h1>
+                <h1 class="hero-title">本週心情指數</h1>
                 <p class="hero-subtitle">持續關心，心情更好</p>
             </div>
 
@@ -712,23 +703,23 @@
 
                 <div class="chart-container">
                     <div class="bar-group">
-                        <div class="bar" style="height: 60%;"></div>
+                        <div class="bar" id="bar-mon"></div>
                         <span class="bar-label">週一</span>
                     </div>
                     <div class="bar-group">
-                        <div class="bar" style="height: 45%;"></div>
+                        <div class="bar" id="bar-tue"></div>
                         <span class="bar-label">週二</span>
                     </div>
                     <div class="bar-group">
-                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" id="bar-wed"></div>
                         <span class="bar-label">週三</span>
                     </div>
                     <div class="bar-group">
-                        <div class="bar" style="height: 50%;"></div>
+                        <div class="bar" id="bar-thu"></div>
                         <span class="bar-label">週四</span>
                     </div>
                     <div class="bar-group">
-                        <div class="bar active" style="height: 88%;"></div>
+                        <div class="bar active" id="bar-today"></div>
                         <span class="bar-label">今天</span>
                     </div>
                 </div>
@@ -763,6 +754,11 @@
                 </div>
 
                 <div class="form-card">
+                    <label class="form-label">緊急連絡人(單位)電話</label>
+                    <input type="tel" class="form-input" placeholder="請輸入電話號碼">
+                </div>
+
+                <div class="form-card">
                     <label class="form-label" style="border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
                         家人社群帳號
                     </label>
@@ -794,7 +790,7 @@
             </div>
             <div class="nav-item" onclick="switchPage('report', this)">
                 <i class="fa-solid fa-chart-pie"></i>
-                <span>健康報告</span>
+                <span>心情指數</span>
             </div>
             <div class="nav-item" onclick="switchPage('profile', this)">
                 <i class="fa-solid fa-user"></i>
@@ -804,7 +800,6 @@
     </div>
 
     <script>
-        // 頁面切換邏輯
         function switchPage(pageId, element) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
@@ -825,7 +820,36 @@
                 }
             }
             
+            if(pageId === 'report') {
+                requestAnimationFrame(() => {
+                    updateChart();
+                });
+            }
+
             window.scrollTo(0,0);
+        }
+
+        function updateChart() {
+            const days = ['bar-mon', 'bar-tue', 'bar-wed', 'bar-thu'];
+            const today = document.getElementById('bar-today');
+
+            days.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.style.height = '0%';
+            });
+            if(today) today.style.height = '0%';
+
+            setTimeout(() => {
+                days.forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) {
+                        const randomHeight = Math.floor(Math.random() * (95 - 80 + 1)) + 80;
+                        el.style.height = randomHeight + '%';
+                    }
+                });
+
+                if(today) today.style.height = '88%';
+            }, 100);
         }
 
         function activateVoice() {
@@ -909,23 +933,18 @@
             alert("資料已儲存！\n\nSilverCare 將根據您的設定提供更個人化的服務。");
         }
 
-        // --- 功能函數 ---
-
-        // 朗讀貼文
         function readPost() {
             const text = document.getElementById('post-content-text').innerText;
-            // 使用瀏覽器語音合成 API 朗讀 (如果支援)
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW'; // 設定語言為繁體中文
-                utterance.rate = 0.9; // 稍微放慢語速適合長輩
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("（模擬語音朗讀）：" + text);
             }
         }
 
-        // 新增家人帳號到列表
         function addFamilyAccount() {
             const input = document.getElementById('family-account-input');
             const list = document.getElementById('saved-accounts-list');
@@ -933,14 +952,11 @@
             const value = input.value.trim();
 
             if (value) {
-                // 隱藏「無儲存帳號」的提示
                 if(noAccountMsg) noAccountMsg.style.display = 'none';
 
-                // 建立新的帳號項目元素
                 const newItem = document.createElement('div');
                 newItem.style.cssText = "background: #F1F8E9; padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #C8E6C9;";
                 
-                // 內容 HTML
                 newItem.innerHTML = `
                     <span style="color: #2E7D32; font-weight: 500;">
                         <i class="fa-solid fa-user-tag" style="margin-right: 5px;"></i> ${value}
@@ -949,7 +965,7 @@
                 `;
 
                 list.appendChild(newItem);
-                input.value = ""; // 清空輸入欄
+                input.value = "";
             } else {
                 alert("請輸入帳號喔！");
             }
